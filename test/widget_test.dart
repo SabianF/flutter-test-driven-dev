@@ -13,7 +13,7 @@ void main() {
   testWidgets(
     'Home page is created', (tester) async {
 
-      final testWidget = MaterialApp(
+      const testWidget = MaterialApp(
         home: HomePage(),
       );
 
