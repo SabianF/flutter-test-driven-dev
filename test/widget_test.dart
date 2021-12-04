@@ -11,18 +11,58 @@ import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   testWidgets(
-    'Home page is created', (tester) async {
+    'Home page is created', (widgetTester) async {
 
       const testWidget = MaterialApp(
         home: HomePage(),
       );
 
-      await tester.pumpWidget(testWidget);
-      await tester.pumpAndSettle();
+      await widgetTester.pumpWidget(testWidget);
+      await widgetTester.pumpAndSettle();
 
+      // Text must exist
       expect(
         find.text('Hello, friend.'),
         findsOneWidget,
+      );
+    }
+  );
+
+  testWidgets(
+    'HomePage has button', (widgetTester) async {
+
+      const testWidget = MaterialApp(
+        home: HomePage(),
+      );
+
+      await widgetTester.pumpWidget(testWidget);
+      await widgetTester.pumpAndSettle();
+
+      final buttonMaterial = find.descendant(
+        of: find.byType(MaterialButton),
+        matching: find.byType(Material),
+      );
+
+      final materialButton = widgetTester.widget<Material>(buttonMaterial);
+      
+      // Button must have
+      
+      // - blue colour
+      expect(
+        materialButton.color, 
+        Colors.blue
+      );
+
+      // - text of 'Weather today'
+      expect(
+        find.text('Weather today'), 
+        findsOneWidget
+      );
+
+      // - weather icon
+      expect(
+        find.byKey(const Key('icon_weather')), 
+        findsOneWidget
       );
     }
   );
