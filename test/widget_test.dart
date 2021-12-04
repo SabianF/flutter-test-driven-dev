@@ -19,6 +19,11 @@ void main() {
 
       await tester.pumpWidget(testWidget);
       await tester.pumpAndSettle();
+
+      expect(
+        find.text('Hello, friend.'),
+        findsOneWidget,
+      );
     }
   );
 }
